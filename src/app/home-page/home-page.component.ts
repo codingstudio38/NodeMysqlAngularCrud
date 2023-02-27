@@ -14,6 +14,8 @@ export class HomePageComponent implements OnInit {
     $(document).ready(() => {
       // alert();
       document.title ="Home";
+
+      
     });
 
 

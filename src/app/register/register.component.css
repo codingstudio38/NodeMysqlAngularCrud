@@ -1,0 +1,108 @@
+/* ::ng-deep body{
+   background-color:#34515E;  
+} */
+
+
+.container-fluid {
+    width: 100%;
+    min-height: 95vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #34515E;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 18px;
+
+}
+
+.register-form {
+    font-size: 16px;
+}
+
+.regbutton {
+    height: 40px;
+    width: -webkit-fill-available;
+    background-color: tomato;
+    border-radius: 0px;
+    font-size: 18px;
+    color: white;
+    border: none !important;
+    margin-bottom: 5px;
+
+}
+
+.regbutton:hover {
+    color: white;
+    background-color: #aa422f;
+}
+
+.regbutton:active {
+    color: white;
+    background-color: #aa422f;
+}
+
+.logbutton {
+    height: 40px;
+    width: -webkit-fill-available;
+    background-color: yellowgreen;
+    border-radius: 0px;
+    font-size: 18px;
+    color: white;
+    border: none !important;
+    margin-bottom: 5px;
+}
+
+.logbutton:hover {
+    color: white;
+    background-color: darkolivegreen;
+}
+
+.logbutton:active {
+    color: white;
+    background-color: darkolivegreen;
+}
+
+
+
+.register-form label {
+    color: aliceblue;
+
+}
+
+.register-form input {
+    margin-bottom: 5px;
+    width: 100%;
+    height: 40px;
+    border-radius: 0px;
+}
+
+.register-form .form-group {
+    width: -webkit-fill-available;
+    margin-bottom: 5px;
+}
+
+.h3tag {
+    color: white;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.smallp {
+    color: white;
+    text-align: center;
+}
+
+.my4div {
+    margin: auto;
+    border: 1px solid #44778e;
+    padding: 10px;
+    background: #426879;
+
+}
+.my4div >.alert p {
+    margin: 0px;
+}
