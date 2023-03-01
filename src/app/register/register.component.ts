@@ -16,9 +16,13 @@ export class RegisterComponent implements OnInit {
   constructor(private APIservice: MyApiHelperService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
+  if (this.APIservice.CheckUserIsLoggedin()) {
+    this.router.navigate(['/admin/dashboard']);
+  }
     $(document).ready(() => {
       document.title = "Register";
     });
+
   }
 
 
@@ -28,7 +32,7 @@ export class RegisterComponent implements OnInit {
     }
     return null;
   }
-
+ 
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]+$')]),
     email: new FormControl('', [Validators.required, Validators.email]),

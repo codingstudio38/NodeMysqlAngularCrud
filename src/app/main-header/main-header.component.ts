@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MyApiHelperService } from '../services/my-api-helper.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 declare var $: any;
 @Component({
   selector: 'app-main-header',
@@ -7,12 +10,15 @@ declare var $: any;
 })
 export class MainHeaderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private APIservice: MyApiHelperService, private router: Router, private cookieService: CookieService) { }
+ 
   ngOnInit(): void {
      $(document).ready(() => {
     // alert();
     });
   }
+checklogin:boolean =  this.APIservice.CheckUserIsLoggedin();
+
+
 
 }
