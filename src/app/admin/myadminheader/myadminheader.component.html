@@ -11,17 +11,19 @@
                 <a class="nav-link" routerLink="/admin/dashboard">Dashboard</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/admin/dashboard">Users</a>
+                <a class="nav-link" routerLink="/admin/userslist">Users List</a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/admin/dashboard">Logout</a>
+            <li class="nav-item" *ngIf="checklogin==true">
+                <a class="nav-link btn btn-success"
+                    style="background: #1bd4e5; border: 1px solid #1bd4e5;  color: rgb(0, 0, 0);">{{
+                    loggedinuser.name
+                    }}</a>
             </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" *ngIf="checklogin==true">
-            <button type="button" class="btn btn-outline-info my-2 my-sm-0" type="button"
-                style="background: #1bd4e5; border: 1px solid #1bd4e5;  color: rgb(0, 0, 0);">{{ loggedinuser.name
-                }}</button>
+        <form class="form-inline my-2 my-lg-0">
+            <button type="button" class="btn btn-success my-2 my-sm-0" type="button" style="color: white;"
+                (click)="LogOut()">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></button>
         </form>
 
     </div>

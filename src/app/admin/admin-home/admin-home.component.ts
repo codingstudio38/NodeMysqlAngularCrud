@@ -13,7 +13,7 @@ declare var $: any;
 export class AdminHomeComponent implements OnInit {
 
   constructor(private APIservice: MyApiHelperService, private router: Router, private cookieService: CookieService) { }
-
+ 
   ngOnInit(): void {
      $(document).ready(() => {
         document.title ="Admin- Dashboard";

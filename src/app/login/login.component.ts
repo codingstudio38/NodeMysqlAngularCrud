@@ -69,7 +69,7 @@ loginform = new FormGroup({
           this.login_message = `<strong>Code ${this.apidata.status} !</strong> ${this.apidata.message}`;
           this.buttonm = `Login`;
           console.clear();
-          console.log(this.apidata);
+         // console.log(this.apidata);
           if (this.apidata.status == 200) {
             this.loginform.reset(); 
             window.localStorage.clear();

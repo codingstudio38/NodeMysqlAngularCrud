@@ -3,6 +3,7 @@ import { HttpErrorResponse, HttpClient, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,14 @@ import { CookieService } from 'ngx-cookie-service';
 export class MyApiHelperService {
 
   apiUrl: any = 'http://localhost:5000';
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
-
+  constructor(private http: HttpClient,  private router: Router,private cookieService: CookieService) { }
+ 
 
   CheckUserIsLoggedin() {
     if (window.localStorage.getItem('loggedin_user')) {
       return true;
     } else {
+      window.localStorage.clear();
       return false;
     }
   }
@@ -26,10 +28,10 @@ Loginuser: any;
       this.Loginuser = window.localStorage.getItem('loggedin_user');
       return JSON.parse(this.Loginuser);
     } else {
+      window.localStorage.clear();
+      this.router.navigate(['/login']);
       return null;
     }
-
-
   }
 
   errorMgmt(error: HttpErrorResponse) {
@@ -62,9 +64,27 @@ Loginuser: any;
       catchError(this.errorMgmt)
     );
   }
+ 
+    LogOut(){
+    return this.http.get(this.apiUrl + '/logout', {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.LoggedinUserData().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 
 
-
+    GetUserList(limit:any,page:any){
+    return this.http.get(`${this.apiUrl}/mypegination?page=${page}&limit=${limit}`, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.LoggedinUserData().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 
 
 
