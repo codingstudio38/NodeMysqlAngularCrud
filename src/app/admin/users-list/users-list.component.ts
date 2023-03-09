@@ -13,30 +13,32 @@ export class UsersListComponent implements OnInit {
   constructor(private APIservice: MyApiHelperService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    this.GetUserList(5, 1);
+    this.GetUserList(this.searchkey_, 5, 1);
   }
 
   checklogin: boolean = this.APIservice.CheckUserIsLoggedin();
   loggedinuser: any = this.APIservice.LoggedinUserData();
 
 
-
+ 
   apidata: any;
   apistatusCode: any;
-  message: any;
+  message: any; 
   tbldata: any[] = [];
   responsdata: any[] = [];
   check: any[] = [];
+  limitfiled: any[] = [5, 10, 25, 50, 100];
   pageis: any = 1;
   total: any;
   limitis: any = 5;
-  GetUserList(limit: any, page: any) {
+  searchkey_: any = "";
+  GetUserList(searchkey: any, limit: any, page: any) {
     if (!this.checklogin) {
       alert("You must login.");
     }
     // console.log(this.checklogin);
     const user = this.loggedinuser;
-    this.APIservice.GetUserList(limit, page).subscribe((response: HttpEvent<any>) => {
+    this.APIservice.GetUserList(searchkey, limit, page).subscribe((response: HttpEvent<any>) => {
       switch (response.type) {
         case HttpEventType.Sent:
           //console.log('Sent' + HttpEventType.Sent);
@@ -75,7 +77,7 @@ export class UsersListComponent implements OnInit {
                 name: item.name,
                 slno: this.check[index]
               })
-            })
+            });
           } else {
             alert(this.message);
           }
@@ -86,20 +88,30 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-
-  openPopup(item: any) {
-
+  ChangeLimit(limit: any) {
+    this.pageis = 1;
+    this.limitis = limit;
+    this.GetUserList(this.searchkey_, this.limitis, 1);
   }
+
+
+  SearchTblData(keyword: any) {
+    this.pageis = 1;
+    this.limitis = 5;
+    this.searchkey_ = keyword;
+    this.GetUserList(this.searchkey_, this.limitis, 1);
+  }
+
+
   deleteis(item: any) {
 
   }
-  useredit(item: any) {
 
-  }
 
   pageChangeEvent(item: any) {
     this.pageis = item;
-    this.GetUserList(this.limitis, this.pageis);
+    // this.limitis = 5;
+    this.GetUserList(this.searchkey_, this.limitis, this.pageis);
   }
 
 

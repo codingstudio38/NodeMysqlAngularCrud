@@ -12,18 +12,21 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserEditComponent implements OnInit {
  
     constructor(private APIservice: MyApiHelperService, private router: Router, private cookieService: CookieService,private routerparam: ActivatedRoute) { } 
-
+ 
 
 
   ngOnInit(): void {
-    if(!this.routerparam.snapshot.queryParamMap.get('id')){
+     if(!this.routerparam.snapshot.queryParamMap.get('id')){
         this.router.navigateByUrl('/admin/dashboard');
     }
-    this.userid = this.routerparam.snapshot.queryParamMap.get('id');//this.routerparam.snapshot.paramMap.get('id');
+    this.query_userid = this.routerparam.snapshot.queryParamMap.get('id');
+    this.param_userid = this.routerparam.snapshot.paramMap.get('id');
   }
+ 
 
 
-userid:any;
+query_userid:any;
+param_userid:any;
 checklogin:boolean =  this.APIservice.CheckUserIsLoggedin();
 loggedinuser:any =  this.APIservice.LoggedinUserData(); 
 

@@ -1,43 +1,67 @@
 <app-myadminheader></app-myadminheader>
-<table class="table table-striped" style="width: 95%;" align="center">
-    <thead>
-        <tr>
-            <th>Sl No</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Created Date</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr
-            *ngFor="let item of tbldata | paginate: { itemsPerPage: limitis, currentPage: pageis, totalItems: total }; let i=index;">
-            <td>{{ item.slno}}</td>
-            <td>{{ item.id}}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.email }}</td>
-            <td>{{ item.phone }}</td>
-            <td>{{ item.created_at | date:'fullDate'}}</td>
-            <td>
-                <button type="button" class="btnnew btn btn-primary m-1" (click)="openPopup(item)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="btnnew btn btn-danger m-1" (click)="deleteis(item.id)">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="btnnew btn btn-warning m-1" (click)="useredit(item)">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </button>
-            </td>
-        </tr>
-    </tbody>
-    <tfoot style="background-color: white;">
-        <tr>
-            <td colspan="7" align="center">
-                <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+<div class="myuserlistdiv">
+    <div class="container-fluid">
+        <section>
+            <table class="table table-striped" align="center">
+                <thead>
+                    <tr>
+                        <th colspan="4" align="left">
+                            <select class="form-control" id="limit" name="limit" #limit style="width: 65px;"
+                                (change)="ChangeLimit(limit.value)">
+
+                                <option value="{{ number }}" *ngFor="let number of limitfiled">{{ number }}</option>
+
+                            </select>
+                        </th>
+                        <th colspan="3" align="right">
+                            <div style=" float: right;"><input class="form-control" type="text"
+                                    placeholder="Search: Name,Email" id="searchbox" name="searchbox" #searchbox
+                                    (keyup)="SearchTblData(searchbox.value)" [value]="searchkey_"></div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Created Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let item of tbldata | paginate: { itemsPerPage: limitis, currentPage: pageis, totalItems: total }; let i=index;">
+                        <td>{{ item.slno}}</td>
+                        <td>{{ item.id}}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.created_at | date:'fullDate'}}</td>
+                        <td>
+                            <a routerLink="/admin/user/{{ item.id}}/details" [queryParams]="{ id: item.id}"
+                                type="button" class="btnnew btn btn-primary m-1">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </a>
+                            <button type="button" class="btnnew btn btn-danger m-1" (click)="deleteis(item.id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                            <a routerLink="/admin/user/{{ item.id}}/edit" [queryParams]="{ id: item.id}"
+                                class="btnnew btn btn-warning m-1">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot style="background-color: white;">
+                    <tr>
+                        <td colspan="7" align="center">
+                            <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </section>
+    </div>
+</div>

@@ -7,7 +7,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserEditComponent } from './user-edit/user-edit.component'; 
 const routes: Routes = [
   { 
-    path: '',  
+    path: '',   
     component: AdminPageComponent, children: [ 
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminHomeComponent },

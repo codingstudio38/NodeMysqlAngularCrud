@@ -1,2 +1,12 @@
 <app-myadminheader></app-myadminheader>
-<p>admin-home works!</p>
+<div class="mydashboarddiv">
+    <div class="container-fluid">
+        <section>
+            <h3>Personal Details</h3>
+            <h5>ID: {{ loggedinuser.id }}</h5>
+            <h5>NAME: {{ loggedinuser.name }}</h5>
+            <h5>EMAIL: {{ loggedinuser.email }}</h5>
+            <h5>PHONE NO: {{ loggedinuser.phone }}</h5>
+        </section>
+    </div>
+</div>

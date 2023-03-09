@@ -9,7 +9,8 @@ import { MyadminheaderComponent } from './myadminheader/myadminheader.component'
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserEditComponent } from './user-edit/user-edit.component'; 
-
+import { Base64encodePipe } from './../healperpipe/base64encode.pipe';
+import { Base64decodePipe } from './../healperpipe/base64decode.pipe';
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -18,6 +19,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UsersListComponent,
     UserDetailsComponent,
     UserEditComponent,
+    Base64encodePipe,
+    Base64decodePipe
   ],
   imports: [
     CommonModule,

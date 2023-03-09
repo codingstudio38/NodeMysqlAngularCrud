@@ -73,11 +73,11 @@ Loginuser: any;
     }).pipe(
       catchError(this.errorMgmt)
     );
-  }
+  } 
 
 
-    GetUserList(limit:any,page:any){
-    return this.http.get(`${this.apiUrl}/mypegination?page=${page}&limit=${limit}`, {
+    GetUserList(key:any,limit:any,page:any){
+    return this.http.get(`${this.apiUrl}/mypegination?search=${key}&page=${page}&limit=${limit}`, {
       reportProgress: true,
       observe: 'events',
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.LoggedinUserData().token}`)

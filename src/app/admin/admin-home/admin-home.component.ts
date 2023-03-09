@@ -20,7 +20,8 @@ export class AdminHomeComponent implements OnInit {
     });
   }
 
-
+  checklogin: boolean = this.APIservice.CheckUserIsLoggedin();
+  loggedinuser: any = this.APIservice.LoggedinUserData();
 
 
 
