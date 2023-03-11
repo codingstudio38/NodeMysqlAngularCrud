@@ -75,7 +75,8 @@ export class UsersListComponent implements OnInit {
                 password: item.password,
                 phone: item.phone,
                 name: item.name,
-                slno: this.check[index]
+                slno: this.check[index],
+                photo : item.photo
               })
             });
           } else {

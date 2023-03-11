@@ -13,7 +13,7 @@
 
                             </select>
                         </th>
-                        <th colspan="3" align="right">
+                        <th colspan="4" align="right">
                             <div style=" float: right;"><input class="form-control" type="text"
                                     placeholder="Search: Name,Email" id="searchbox" name="searchbox" #searchbox
                                     (keyup)="SearchTblData(searchbox.value)" [value]="searchkey_"></div>
@@ -22,6 +22,7 @@
                     <tr>
                         <th>Sl No</th>
                         <th>Id</th>
+                        <th>Photo</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -34,6 +35,12 @@
                         *ngFor="let item of tbldata | paginate: { itemsPerPage: limitis, currentPage: pageis, totalItems: total }; let i=index;">
                         <td>{{ item.slno}}</td>
                         <td>{{ item.id}}</td>
+                        <td>
+                            <img src="http://localhost:5000/usersfile/ava1-bg.webp" style="width: 30px;"
+                                *ngIf="item.photo==null">
+                            <img src="http://localhost:5000/usersfile/{{ item.photo }}" style="width: 30px;"
+                                *ngIf="item.photo!==null">
+                        </td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.email }}</td>
                         <td>{{ item.phone }}</td>
@@ -55,7 +62,7 @@
                 </tbody>
                 <tfoot style="background-color: white;">
                     <tr>
-                        <td colspan="7" align="center">
+                        <td colspan="8" align="center">
                             <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
                         </td>
                     </tr>

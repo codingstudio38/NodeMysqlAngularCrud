@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
-})
+}) 
 export class UserDetailsComponent implements OnInit {
 
   constructor(private APIservice: MyApiHelperService, private router: Router, private cookieService: CookieService,private routerparam: ActivatedRoute) { } 
@@ -20,7 +20,7 @@ export class UserDetailsComponent implements OnInit {
     this.param_userid = this.routerparam.snapshot.paramMap.get('id');
   }
  
-
+ 
 
 query_userid:any;
 param_userid:any;
