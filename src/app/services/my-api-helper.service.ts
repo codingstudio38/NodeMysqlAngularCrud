@@ -22,7 +22,7 @@ export class MyApiHelperService {
       return false;
     }
   }
-Loginuser: any;
+Loginuser: any; 
   LoggedinUserData() {
     if (this.CheckUserIsLoggedin()) {
       this.Loginuser = window.localStorage.getItem('loggedin_user');
@@ -85,6 +85,29 @@ Loginuser: any;
       catchError(this.errorMgmt)
     );
   }
+
+
+  UserFindById(id:any){
+    return this.http.get(`${this.apiUrl}/user/${id}/find`, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.LoggedinUserData().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+UpdatePhoto(data:any){
+   return this.http.post(this.apiUrl + '/update-photo',data, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.LoggedinUserData().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+}
+
+
 
 
 

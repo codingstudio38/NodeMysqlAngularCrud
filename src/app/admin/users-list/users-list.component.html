@@ -36,10 +36,10 @@
                         <td>{{ item.slno}}</td>
                         <td>{{ item.id}}</td>
                         <td>
-                            <img src="http://localhost:5000/usersfile/ava1-bg.webp" style="width: 30px;"
-                                *ngIf="item.photo==null">
-                            <img src="http://localhost:5000/usersfile/{{ item.photo }}" style="width: 30px;"
-                                *ngIf="item.photo!==null">
+                            <img src="http://localhost:5000/usersfile/ava1-bg.webp" alt="Avatar" title="Avatar"
+                                style="width: 30px;" *ngIf="item.photo==null">
+                            <img src="http://localhost:5000/usersfile/{{ item.photo }}" alt="{{ item.name }}"
+                                title="{{ item.name }}" style="width: 30px;" *ngIf="item.photo!==null">
                         </td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.email }}</td>

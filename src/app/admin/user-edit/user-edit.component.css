@@ -1,0 +1,12 @@
+ .myuserdetailsdiv {
+ height: 100%;
+} 
+.myborder{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 1px;
+    padding: 5px;
+}
+.text-decoration-underline{
+    text-decoration: underline;
+}

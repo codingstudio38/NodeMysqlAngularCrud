@@ -1,2 +1,73 @@
 <app-myadminheader></app-myadminheader>
-<p>user-edit works! {{ query_userid}}---{{ param_userid}}</p>
+<div class="myusereditdiv">
+    <div class="container-fluid">
+        <section class="m-2">
+            <div class="row">
+                <div class="col-md-4 myborder">
+                    <h5 class="text-center text-uppercase text-decoration-underline">Edit Profile Photo</h5>
+                    <form [formGroup]="profilephoto" (ngSubmit)="UpdatePhoto()">
+                        <input type="hidden" class="form-control" id="id" name="id" formControlName="id">
+                        <input type="hidden" class="form-control" id="oldfile" name="oldfile" formControlName="oldfile">
+                        <div class="mb-2">
+                            <img src="http://localhost:5000/usersfile/ava1-bg.webp"
+                                class="img-fluid my-1 rounded mx-auto d-block" alt="Avatar" title="Avatar"
+                                style="width: 100px;" *ngIf="user.photo==null" />
+                            <img src="http://localhost:5000/usersfile/{{ user.photo }}"
+                                class="img-fluid my-1 rounded mx-auto d-block" alt="Avatar" title="Avatar"
+                                style="width: 100px;" *ngIf="user.photo!==null" />
+                        </div>
+                        <div class="mb-2">
+                            <input type="file" class="form-control" name="photo" id="photo" formControlName="photo"
+                                (change)="uploadFile($event)">
+                            <small class="form-text text-danger" *ngIf="photo && photo.invalid && photo.touched">Field
+                                is
+                                required.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="profilephoto.invalid">Save
+                            Change</button>
+                    </form>
+                </div>
+
+                <div class="col-md-4 myborder">
+                    <h5 class="text-center text-uppercase text-decoration-underline">Edit Personal Details</h5>
+                    <form [formGroup]="personalform" (ngSubmit)="UpdatePersonal()">
+                        <input type="hidden" class="form-control" id="id" name="id" formControlName="id">
+                        <div class="mb-2">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" formControlName="name">
+                        </div>
+                        <div class="mb-2">
+                            <label for="email" class="form-label">Email Id</label>
+                            <input type="email" class="form-control" id="email" name="email" formControlName="email">
+                        </div>
+                        <div class="mb-2">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" formControlName="phone">
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="personalform.invalid">Save
+                            Change</button>
+                    </form>
+                </div>
+
+                <div class="col-md-4 myborder">
+                    <h5 class="text-center text-uppercase text-decoration-underline">Change Password</h5>
+                    <form [formGroup]="profilepassword" (ngSubmit)="UpdatePassword()">
+                        <input type="hidden" class="form-control" id="id" name="id" formControlName="id">
+                        <div class="mb-2">
+                            <label for="old_password" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="old_password" name="old_password"
+                                formControlName="old_password">
+                        </div>
+                        <div class="mb-2">
+                            <label for="new_password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password"
+                                formControlName="new_password">
+                        </div>
+                        <button type="submit" class="btn btn-primary"
+                            [disabled]="profilepassword.invalid">Update</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

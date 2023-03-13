@@ -11,7 +11,10 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserEditComponent } from './user-edit/user-edit.component'; 
 import { Base64encodePipe } from './../healperpipe/base64encode.pipe';
 import { Base64decodePipe } from './../healperpipe/base64decode.pipe';
-@NgModule({
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+@NgModule({ 
   declarations: [
     AdminHomeComponent,
     AdminPageComponent,
@@ -25,7 +28,9 @@ import { Base64decodePipe } from './../healperpipe/base64decode.pipe';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdminModule { }
