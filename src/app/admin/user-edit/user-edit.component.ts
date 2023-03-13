@@ -79,7 +79,7 @@ export class UserEditComponent implements OnInit {
   apistatusCode: any;
   message: any;
   user: any;
-
+  userphoto: any = "http://localhost:5000/usersfile/ava1-bg.webp";
   UserFindById(id: any) {
     if (!this.checklogin) {
       alert("You must login.");
@@ -105,6 +105,10 @@ export class UserEditComponent implements OnInit {
           //console.log(this.apidata);
           if (this.apidata.status == 200) {
             this.user = this.apidata.user;
+            if (this.user.photo !== null) {
+              this.userphoto = `http://localhost:5000/usersfile/${this.user.photo}`;
+            }
+
             this.personalform = new FormGroup({
               id: new FormControl(this.user.id, [Validators.required]),
               name: new FormControl(this.user.name, [Validators.required]),
@@ -142,10 +146,23 @@ export class UserEditComponent implements OnInit {
   }
 
   uploadFile(event: any): void {
+    const test: any = document.getElementById("photo") as HTMLInputElement | null;
+    const Avatar: any = document.getElementById("Avatar") as HTMLInputElement | null;
+    if (test.files.length !== undefined && test.files.length > 0) {
+      var reader = new FileReader();
+      reader.onload = function (e: any) {
+        Avatar.src = e.target.result;
+      };
+      reader.readAsDataURL(test.files[0]);
+    } else {
+      Avatar.src = this.userphoto;
+    }
+
     if (event.target.files.length > 0) {
       this.profilephoto.patchValue({
         photo: <File>event.target.files[0]
       });
+
     } else {
       this.profilephoto.patchValue({
         photo: ""
@@ -166,7 +183,7 @@ export class UserEditComponent implements OnInit {
     console.log(myphotoform);
 
 
-this.APIservice.UpdatePhoto(myphotoform).subscribe((response: HttpEvent<any>) => {
+    this.APIservice.UpdatePhoto(myphotoform).subscribe((response: HttpEvent<any>) => {
       switch (response.type) {
         case HttpEventType.Sent:
           //console.log('Sent' + HttpEventType.Sent);
@@ -183,7 +200,19 @@ this.APIservice.UpdatePhoto(myphotoform).subscribe((response: HttpEvent<any>) =>
           this.apistatusCode = this.apidata.status;
           this.message = `Code ${this.apidata.status}! ${this.apidata.message}`;
           console.clear();
-          console.log(this.apidata);
+          //console.log(this.apidata);
+          if (this.apidata.status == 200) {
+            this.profilephoto.reset();
+            this.profilephoto.patchValue({
+              id: this.user.id,
+              oldfile: this.apidata.file_name
+            });
+            this.userphoto = `http://localhost:5000/usersfile/${this.apidata.file_name}`;
+             //alert(this.message);
+          } else {
+            alert(this.message);
+          }
+
       }
     });
 
