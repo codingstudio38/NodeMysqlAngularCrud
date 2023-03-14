@@ -24,6 +24,7 @@ export class UserEditComponent implements OnInit {
     this.param_userid = this.routerparam.snapshot.paramMap.get('id');
     $(document).ready(() => {
       document.title = "Admin- User Edit";
+
     });
     this.UserFindById(this.query_userid);
   }
@@ -77,6 +78,7 @@ export class UserEditComponent implements OnInit {
 
   apidata: any;
   apistatusCode: any;
+  Code: any="";
   message: any;
   user: any;
   userphoto: any = "http://localhost:5000/usersfile/ava1-bg.webp";
@@ -99,8 +101,9 @@ export class UserEditComponent implements OnInit {
           break;
         case HttpEventType.Response:
           this.apidata = response.body;
-          this.apistatusCode = this.apidata.status;
-          this.message = `Code ${this.apidata.status}! ${this.apidata.message}`;
+          this.apistatusCode = "Status "+this.apidata.status;
+          this.Code = this.apidata.status;
+          this.message = this.apidata.message;
           console.clear();
           //console.log(this.apidata);
           if (this.apidata.status == 200) {
@@ -109,29 +112,27 @@ export class UserEditComponent implements OnInit {
               this.userphoto = `http://localhost:5000/usersfile/${this.user.photo}`;
             }
 
-            this.personalform = new FormGroup({
-              id: new FormControl(this.user.id, [Validators.required]),
-              name: new FormControl(this.user.name, [Validators.required]),
-              email: new FormControl(this.user.email, [Validators.required]),
-              phone: new FormControl(this.user.phone, [Validators.required])
+            this.personalform.patchValue({
+              id: this.user.id,
+              name: this.user.name,
+              email: this.user.email,
+              phone: this.user.phone
             });
-
-            this.profilephoto = new FormGroup({
-              id: new FormControl(this.user.id, [Validators.required]),
-              photo: new FormControl('', [Validators.required]),
-              oldfile: new FormControl(this.user.photo),
+            this.profilephoto.patchValue({
+              id: this.user.id,
+              oldfile: this.user.photo,
             });
-
-            this.profilepassword = new FormGroup({
-              id: new FormControl(this.user.id, [Validators.required]),
-              old_password: new FormControl('', [Validators.required]),
-              new_password: new FormControl('', [Validators.required]),
+            this.profilepassword.patchValue({
+              id: this.user.id,
             });
-
+            
           } else {
             alert(this.message);
             this.router.navigateByUrl('/admin/userslist');
           }
+          setTimeout(()=>{
+            this.Code = "";
+          },4000);
       }
     });
   }
@@ -141,9 +142,7 @@ export class UserEditComponent implements OnInit {
   //http://localhost:5000/update-photo
   //http://localhost:5000/change-password
   //http://localhost:5000/update
-  UpdatePersonal() {
-
-  }
+  
 
   uploadFile(event: any): void {
     const test: any = document.getElementById("photo") as HTMLInputElement | null;
@@ -197,8 +196,9 @@ export class UserEditComponent implements OnInit {
           break;
         case HttpEventType.Response:
           this.apidata = response.body;
-          this.apistatusCode = this.apidata.status;
-          this.message = `Code ${this.apidata.status}! ${this.apidata.message}`;
+          this.apistatusCode = "Status "+this.apidata.status;
+          this.Code = this.apidata.status;
+          this.message = this.apidata.message;
           console.clear();
           //console.log(this.apidata);
           if (this.apidata.status == 200) {
@@ -208,25 +208,32 @@ export class UserEditComponent implements OnInit {
               oldfile: this.apidata.file_name
             });
             this.userphoto = `http://localhost:5000/usersfile/${this.apidata.file_name}`;
-             //alert(this.message);
           } else {
             alert(this.message);
           }
-
+          setTimeout(()=>{
+            this.Code = "";
+          },4000);
       }
     });
-
-
-
-
   }
 
 
-  UpdatePassword() {
+UpdatePersonal() {
 
-  }
+}
 
 
+
+UpdatePassword() {
+
+}
+
+
+
+HideAlert(){
+  this.Code = "";
+}
 
 
 }

@@ -1,13 +1,99 @@
  .myuserdetailsdiv {
- height: 100%;
-} 
-.myborder{
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 1px;
-    height: 300px;
-    padding: 5px;
-}
-.text-decoration-underline{
-    text-decoration: underline;
-}
+     height: 100%;
+ }
+
+ .myborder {
+     border: 1px solid black;
+     border-radius: 5px;
+     margin: 1px;
+     height: 300px;
+     padding: 5px;
+ }
+
+ .text-decoration-underline {
+     text-decoration: underline;
+ }
+
+
+
+ .alerts {
+     position: absolute;
+    right: 30px;
+    width: 400px;
+    z-index: 9;
+    cursor: pointer;
+    bottom: 30px;
+ }
+
+ .alerts .alert {
+     position: relative;
+     border: none !important;
+     margin-bottom: 8px;
+     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+ }
+
+ .alerts .alert .icon {
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     margin-left: -15px;
+     width: 80px;
+     text-align: center;
+ }
+
+ .alerts .alert .copy {
+     margin-left: 60px;
+     padding-left: 20px;
+     border-left: 1px solid rgba(255, 255, 255, 0.3);
+     line-height: 1.2;
+ }
+
+ .alerts .alert .copy h4 {
+     font-size: 16px;
+     font-weight: 600;
+     margin-bottom: 5px;
+ }
+
+ .alerts .alert .copy p {
+     font-size: 14px;
+     margin-bottom: 0;
+ }
+
+ .alerts .alert .close {
+     opacity: 1;
+     background-color: #eee;
+     width: 30px;
+     height: 30px;
+     line-height: 26px;
+     text-align: center;
+     border-radius: 50%;
+     border: 2px solid #333;
+     position: absolute;
+     top: 50%;
+     right: -15px;
+     transform: translateY(-50%);
+ }
+
+ .alerts .alert.alert-success {
+     background-color: #A4B123;
+     color: #eee;
+     box-shadow: 0 0 20px 5px rgba(164, 177, 35, 0.5);
+ }
+
+ .alerts .alert.alert-success .close {
+     color: #A4B123;
+     border-color: #A4B123;
+ }
+
+
+ .alerts .alert.alert-danger {
+     background-color: #C20000;
+     color: #eee;
+     box-shadow: 0 0 20px 5px rgba(194, 0, 0, 0.3);
+ }
+
+ .alerts .alert.alert-danger .close {
+     color: #C20000;
+     border-color: #C20000;
+ }
+

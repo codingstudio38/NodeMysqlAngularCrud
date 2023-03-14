@@ -1,5 +1,34 @@
 <app-myadminheader></app-myadminheader>
 <div class="myusereditdiv">
+    <div class="alerts">
+
+        <div class="alert alert-success animated bounceInRight" *ngIf="Code=='200'" (click)="HideAlert()">
+            <div class="icon pull-left">
+                <i class="fa fa-check fa-2x"></i>
+            </div>
+            <div class="copy">
+                <h4>{{ apistatusCode }}</h4>
+                <p>{{ message }}</p>
+            </div>
+            <a class="close" (click)="HideAlert()">
+                <i class="fa fa-times" (click)="HideAlert()"></i>
+            </a>
+        </div>
+
+        <div class="alert alert-danger animated bounceInRight" *ngIf="Code=='400'" (click)="HideAlert()">
+            <div class="icon pull-left">
+                <i class="fa fa-exclamation-triangle fa-2x"></i>
+            </div>
+            <div class="copy">
+                <h4>{{ apistatusCode }}</h4>
+                <p>{{ message }}</p>
+            </div>
+            <a class="close" (click)="HideAlert()">
+                <i class="fa fa-times" (click)="HideAlert()"></i>
+            </a>
+        </div>
+
+    </div>
     <div class="container-fluid">
         <section class="m-2">
             <div class="row">
