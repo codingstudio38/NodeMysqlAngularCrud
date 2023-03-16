@@ -107,8 +107,16 @@ UpdatePhoto(data:any){
     );
 }
 
-
-
+ 
+UpdatePersonal(data:any){
+  return this.http.post(this.apiUrl + '/update',data, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.LoggedinUserData().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+}
 
 
 

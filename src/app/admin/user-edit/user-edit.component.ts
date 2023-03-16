@@ -83,10 +83,10 @@ export class UserEditComponent implements OnInit {
   user: any;
   userphoto: any = "http://localhost:5000/usersfile/ava1-bg.webp";
   UserFindById(id: any) {
+    this.APIservice.LoggedinUserData();
     if (!this.checklogin) {
       alert("You must login.");
     }
-    this.APIservice.LoggedinUserData();
     this.APIservice.UserFindById(id).subscribe((response: HttpEvent<any>) => {
       switch (response.type) {
         case HttpEventType.Sent:
@@ -171,17 +171,14 @@ export class UserEditComponent implements OnInit {
 
 
   UpdatePhoto() {
+    this.APIservice.LoggedinUserData();
     if (!this.checklogin) {
       alert("You must login.");
     }
-    this.APIservice.LoggedinUserData();
     const myphotoform = new FormData();
     myphotoform.append('id', this.profilephoto.get('id')?.value);
     myphotoform.append('photo', this.profilephoto.get('photo')?.value);
     myphotoform.append('oldfile', this.profilephoto.get('oldfile')?.value);
-    console.log(myphotoform);
-
-
     this.APIservice.UpdatePhoto(myphotoform).subscribe((response: HttpEvent<any>) => {
       switch (response.type) {
         case HttpEventType.Sent:
@@ -217,10 +214,42 @@ export class UserEditComponent implements OnInit {
       }
     });
   }
-
+ 
 
 UpdatePersonal() {
-
+this.APIservice.LoggedinUserData();
+ if (!this.checklogin) {
+      alert("You must login.");
+    } 
+    const myform = new FormData();
+    myform.append('id', this.personalform.get('id')?.value);
+    myform.append('name', this.personalform.get('name')?.value);
+    myform.append('email', this.personalform.get('email')?.value);
+     myform.append('phone', this.personalform.get('phone')?.value);
+    this.APIservice.UpdatePersonal(myform).subscribe((response: HttpEvent<any>) => {
+      switch (response.type) {
+        case HttpEventType.Sent:
+          //console.log('Sent' + HttpEventType.Sent);
+          break;
+        case HttpEventType.ResponseHeader:
+          // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
+          break;
+        case HttpEventType.UploadProgress:
+          //this.evenTotal = response.total;
+          //this.progress = Math.round(response.loaded / this.evenTotal * 100);
+          break;
+        case HttpEventType.Response:
+          this.apidata = response.body;
+          this.apistatusCode = "Status "+this.apidata.status;
+          this.Code = this.apidata.status;
+          this.message = this.apidata.message;
+          console.clear();
+          console.log(this.apidata);
+          setTimeout(()=>{
+            this.Code = "";
+          },4000);
+      }
+    });
 }
 
 
